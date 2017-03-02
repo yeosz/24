@@ -1,23 +1,18 @@
 <?php
 
 if(count($argv) < 5) die('参数不足');
+array_shift($argv);
 
-$number = [$argv[1], $argv[2], $argv[3], $argv[4]];
-
-$result = permutation(['a', 'b', 'c', 'd']);
+$result = permutation($argv);
 $method = ['+', '-', '*', '/'];
 
 $result = getExpression($result, $method);
-
-//print_r($result);die;
+$result = array_unique($result);
 
 $out = [];
 foreach($result as $v)
 {
-    $str = str_replace('a', $number[0], $v);
-    $str = str_replace('b', $number[1], $str);
-    $str = str_replace('c', $number[2], $str);
-    $str = "return " . str_replace('d', $number[3], $str) . ";";
+    $str = "return {$v};";
     $result = @eval($str);
     if(round($result, 5) == 24) $out[] = substr($str, 7);
 }
@@ -37,7 +32,7 @@ function getExpression($data, $method)
     for($i=1; $i<$count; $i++)
     {
         $result = [];
-        foreach ($data as $v)
+        foreach ($data as $id=>&$v)
         {
             foreach ($method as $m)
             {
@@ -47,6 +42,7 @@ function getExpression($data, $method)
                 $temp = array_merge($temp, $tmp);
                 $result[] = count($temp) == 1 ? $temp[0] : $temp;
             }
+            unset($data[$id]);
         }
         $data = $result;
     }    
@@ -68,7 +64,7 @@ function permutation($arr)
     else
     {
         $result = [];
-        foreach($arr as $id=>$v)
+        foreach($arr as $id=>&$v)
         {
             $temp = $arr;
             $now = $temp[$id];
