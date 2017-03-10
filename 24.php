@@ -10,11 +10,14 @@ $result = getExpression($result, $method);
 $result = array_unique($result);
 
 $out = [];
+
+$rs = [24, -24, round(1/24, 8), round(-1/24, 8)];
+
 foreach($result as $v)
 {
     $str = "return {$v};";
     $result = @eval($str);
-    if(round($result, 5) == 24) $out[] = substr($str, 7);
+    if(in_array(round($result, 8), $rs)) $out[] = substr($str, 7);
 }
 
 print_r($out);
