@@ -10,14 +10,11 @@ $result = getExpression($result, $method);
 $result = array_unique($result);
 
 $out = [];
-
-$rs = [24, -24, round(1/24, 8), round(-1/24, 8)];
-
 foreach($result as $v)
 {
     $str = "return {$v};";
     $result = @eval($str);
-    if(in_array(round($result, 8), $rs)) $out[] = substr($str, 7);
+    if(round($result, 8) == 24) $out[] = substr($str, 7);
 }
 
 print_r($out);
@@ -40,9 +37,12 @@ function getExpression($data, $method)
             foreach ($method as $m)
             {
                 $tmp = $v;
-                $temp = ["({$v[0]}{$m}{$v[1]})"];
                 unset($tmp[0], $tmp[1]);
-                $temp = array_merge($temp, $tmp);
+
+                $temp = array_merge(["({$v[0]}{$m}{$v[1]})"], $tmp);
+                $result[] = count($temp) == 1 ? $temp[0] : $temp;
+
+                $temp = array_merge(["({$v[1]}{$m}{$v[0]})"], $tmp);
                 $result[] = count($temp) == 1 ? $temp[0] : $temp;
             }
             unset($data[$id]);
