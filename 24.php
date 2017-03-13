@@ -4,29 +4,26 @@ if(count($argv) < 5) die('参数不足');
 array_shift($argv);
 
 $result = permutation($argv);
-$method = ['+', '-', '*', '/'];
 
-$result = getExpression($result, $method);
+$result = getExpression($result);
 $result = array_unique($result);
 
 $out = [];
-foreach($result as $v)
+foreach ($result as $v)
 {
     $str = "return {$v};";
     $result = @eval($str);
     if(round($result, 8) == 24) $out[] = substr($str, 7);
 }
-
 print_r($out);
 die;
 
 /**
  * 表达式
  * @param array $data
- * @param array $method
  * @return array
  */
-function getExpression($data, $method)
+function getExpression($data)
 {
     $count = count($data[0]);
     for($i=1; $i<$count; $i++)
@@ -34,22 +31,19 @@ function getExpression($data, $method)
         $result = [];
         foreach ($data as $id=>&$v)
         {
-            foreach ($method as $m)
-            {
-                $tmp = $v;
-                unset($tmp[0], $tmp[1]);
-
-                $temp = array_merge(["({$v[0]}{$m}{$v[1]})"], $tmp);
-                $result[] = count($temp) == 1 ? $temp[0] : $temp;
-
-                $temp = array_merge(["({$v[1]}{$m}{$v[0]})"], $tmp);
-                $result[] = count($temp) == 1 ? $temp[0] : $temp;
-            }
+            $tmp = $v;
+            unset($tmp[0], $tmp[1]);
+            $result[] = array_merge(["({$v[0]}+{$v[1]})"], $tmp);
+            $result[] = array_merge(["({$v[0]}-{$v[1]})"], $tmp);
+            $result[] = array_merge(["({$v[1]}-{$v[0]})"], $tmp);
+            $result[] = array_merge(["({$v[0]}*{$v[1]})"], $tmp);
+            $result[] = array_merge(["({$v[0]}/{$v[1]})"], $tmp);
+            $result[] = array_merge(["({$v[1]}/{$v[0]})"], $tmp);
             unset($data[$id]);
         }
         $data = $result;
-    }    
-    return $data;
+    }
+    return array_map('current', $data);
 }
 
 /**
