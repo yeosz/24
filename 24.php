@@ -1,6 +1,6 @@
 <?php
 
-if(count($argv) < 5) die('参数不足');
+if(count($argv) != 5) die('参数异常');
 array_shift($argv);
 
 $result = permutation($argv);
@@ -19,32 +19,68 @@ print_r($out);
 die;
 
 /**
- * 表达式
+ * 获取所有表达式
  * @param array $data
  * @return array
  */
 function getExpression($data)
 {
-    $count = count($data[0]);
-    for($i=1; $i<$count; $i++)
+    // 情况1:两两分组
+    $rs = [];
+    foreach($data as $v)
+    {
+        $a = getAllResult($v[0], $v[1]);
+        $b = getAllResult($v[2], $v[3]);
+        foreach($a as $v1)
+        {
+            foreach($b as $v2)
+            {
+                $tmp = getAllResult($v1, $v2);
+                $rs = array_merge($tmp, $rs);
+            }
+        }
+    }
+
+    // 情况2:依次运算
+    for($i=1; $i<4; $i++)
     {
         $result = [];
         foreach ($data as $id=>&$v)
         {
             $tmp = $v;
             unset($tmp[0], $tmp[1]);
-            $result[] = array_merge(["({$v[0]}+{$v[1]})"], $tmp);
-            $result[] = array_merge(["({$v[0]}-{$v[1]})"], $tmp);
-            $result[] = array_merge(["({$v[1]}-{$v[0]})"], $tmp);
-            $result[] = array_merge(["({$v[0]}*{$v[1]})"], $tmp);
-            $result[] = array_merge(["({$v[0]}/{$v[1]})"], $tmp);
-            $result[] = array_merge(["({$v[1]}/{$v[0]})"], $tmp);
+            $temp = getAllResult($v[0], $v[1]);
+            foreach($temp as $t)
+            {
+                $result[] = array_merge([$t], $tmp);
+            }
             unset($data[$id]);
         }
         $data = $result;
     }
-    return array_map('current', $data);
+
+    $result = array_map('current', $data);
+    return array_merge($rs, $result);
 }
+
+/**
+ * 两个数的所有运算结果
+ * @param int $a
+ * @param int $b
+ * @return array
+ */
+function getAllResult($a, $b)
+{
+    $result = [];
+    $result[] = "({$a}+{$b})";
+    $result[] = "({$a}-{$b})";
+    $result[] = "({$b}-{$a})";
+    $result[] = "({$a}*{$b})";
+    $result[] = "({$a}/{$b})";
+    $result[] = "({$b}/{$a})";
+    return $result;
+}
+
 
 /**
  * 排列
