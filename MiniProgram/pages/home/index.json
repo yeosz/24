@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "van-button": "/zanui/button/index",
+        "van-row": "/zanui/row/index",
+        "van-col": "/zanui/col/index",
+        "van-notify": "/zanui/notify/index"
+    }
+}

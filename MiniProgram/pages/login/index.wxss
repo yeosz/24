@@ -1,0 +1,44 @@
+.login-container {
+    margin-top: 25%;
+	height: 100%;
+	background: #fff;
+}
+
+.app-info {
+	position: relative;
+	padding: 20px;
+	text-align: center;
+}
+
+.app-info:after {
+	content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    color: #E5E5E5;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.app-info .app-logo {
+	display: block;
+	width: 88px;
+	height: 88px;
+	margin: 10px auto;
+	border-radius: 8px;
+}
+
+.app-info .app-name {
+	font-weight: bold;
+	font-size: 18px;
+	color: #f44;
+}
+
+.login button{
+    width: 60%;
+    color:#fff;
+}

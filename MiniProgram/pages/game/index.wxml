@@ -1,0 +1,103 @@
+<view class='page'>
+    <view>
+        <van-notify id="van-notify" />
+    </view>
+    <view class="v-text">
+        <van-row>
+            <van-col span="6">
+                <text>{{numbers[0]}}</text>
+            </van-col>
+            <van-col span="6">
+                <text>{{numbers[1]}}</text>
+            </van-col>
+            <van-col span="6">
+                <text>{{numbers[2]}}</text>
+            </van-col>
+            <van-col span="6">
+                <text>{{numbers[3]}}</text>
+            </van-col>
+        </van-row>
+    </view>
+
+    <view class="v-main">
+
+        <view class="v-express">
+            <view class="express-1">
+                <view class="express-1-input">
+                    <input disabled="true" value="{{expression}}" />
+                </view>
+                <view class="express-1-btn">
+                    <button bindtap="chearForm">清除</button>
+                </view>
+            </view>
+        </view>
+
+        <view class="v-operator">
+            <van-row class="row-1">
+                <van-col span="6" class="b-operator">
+                    <view hover-class="b-operator-hover">
+                        <button bindtap="clickOperator" hover-class="b-operator-hover" data-item="+" style="height:100%;line-height:{{btnHeight}}">+</button>
+                    </view>
+                </van-col>
+                <van-col span="6" class="b-number">
+                    <view hover-class="b-number-hover">
+                        <button class="{{numbersUsed[0] ? 'b-number-used' : ''}}" hover-class="b-number-hover" bindtap="clickNumber" data-item="0" style="height:100%;line-height:{{btnHeight}}">{{numbers[0]}}</button>
+                    </view>
+                </van-col>
+                <van-col span="6" class="b-number">
+                    <view hover-class="b-number-hover">
+                        <button class="{{numbersUsed[1] ? 'b-number-used' : ''}}" hover-class="b-number-hover" bindtap="clickNumber" data-item="1" style="height:100%;line-height:{{btnHeight}}">{{numbers[1]}}</button>
+                    </view>
+                </van-col>
+                <van-col span="6" class="b-operator">
+                    <view hover-class="b-operator-hover">
+                        <button hover-class="b-operator-hover" bindtap="clickOperator" data-item="(" style="height:100%;line-height:{{btnHeight}}">(</button>
+                    </view>
+                </van-col>
+            </van-row>
+
+            <van-row class="row-2">
+                <van-col span="6" class="b-operator" hover-class="b-operator-hover">
+                    <view>
+                        <button hover-class="b-operator-hover" bindtap="clickOperator" data-item="-" style="height:100%;line-height:{{btnHeight}}">-</button>
+                    </view>
+                </van-col>
+                <van-col span="6" class="b-number" hover-class="b-number-hover">
+                    <view>
+                        <button class="{{numbersUsed[2] ? 'b-number-used' : ''}}" hover-class="b-number-hover" bindtap="clickNumber" data-item="2" style="height:100%;line-height:{{btnHeight}}">{{numbers[2]}}</button>
+                    </view>
+                </van-col>
+                <van-col span="6" class="b-number">
+                    <view hover-class="b-number-hover">
+                        <button class="{{numbersUsed[3] ? 'b-number-used' : ''}}" hover-class="b-number-hover" bindtap="clickNumber" data-item="3" style="height:100%;line-height:{{btnHeight}}">{{numbers[3]}}</button>
+                    </view>
+                </van-col>
+                <van-col span="6" class="b-operator">
+                    <view hover-class="b-operator-hover">
+                        <button hover-class="b-operator-hover" bindtap="clickOperator" data-item=")" style="height:100%;line-height:{{btnHeight}}">)</button>
+                    </view>
+                </van-col>
+            </van-row>
+
+            <van-row class="row-3">
+                <van-col span="6" class="b-operator">
+                    <view hover-class="b-operator-hover">
+                        <button hover-class="b-operator-hover" bindtap="clickOperator" data-item="×" style="height:100%;line-height:{{btnHeight}}">×</button>
+                    </view>
+                </van-col>
+                <van-col span="6" class="b-operator">
+                    <view hover-class="b-operator-hover">
+                        <button hover-class="b-operator-hover" bindtap="clickOperator" data-item="÷" style="height:100%;line-height:{{btnHeight}}">÷</button>
+                    </view>
+                </van-col>
+                <van-col span="12" class="b-submit">
+                    <view>
+                        <button bindtap="submitForm" style="height:100%;line-height:{{btnHeight}}">=</button>
+                    </view>
+                </van-col>
+            </van-row>
+
+        </view>
+
+    </view>
+</view>

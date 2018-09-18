@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/home/index",
+    "pages/game/index",
+    "pages/history/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ff4444",
+    "navigationBarTitleText": "Point 24",
+    "navigationBarTextStyle": "#000"
+  }
+}

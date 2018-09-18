@@ -1,0 +1,9 @@
+<view class='page'>
+    <van-cell-group>
+        <view wx:for="{{logs}}" wx:key="id">
+            <van-cell title="{{item.number1}} {{item.number2}} {{item.number3}} {{item.number4}}" 
+            value="{{item.answer}}" 
+            label="  {{item.created_at}}" />
+        </view>
+    </van-cell-group>
+</view>

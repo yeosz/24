@@ -1,0 +1,11 @@
+.v-text {
+    margin-top: 18%;
+    font-size: 7.5em;
+    text-align: center;
+    color: #f44;
+    margin-bottom: 18%;
+}
+
+.v-btn-2 {
+    margin-top: 4%;
+}

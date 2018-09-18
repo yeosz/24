@@ -1,0 +1,9 @@
+<view class="login-container">
+	<view class="login" wx:if="{{ !logged }}">
+		<view class="app-info">
+			<image class="app-logo" src="/image/logo.png"/>
+			<text class="app-name">Point 24</text>
+		</view>
+		<button type="warn" wx:if="{{logging==0}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权登录</button>
+	</view>
+</view>
